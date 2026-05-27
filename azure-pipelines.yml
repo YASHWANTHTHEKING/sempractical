@@ -7,18 +7,15 @@ variables:
 
 steps:
 - task: Cache@2
-  inputs:
   displayName: 'Cache Maven repository'
   continueOnError: true
   inputs:
-    key: "maven | $(Agent.OS) | pom.xml"
-    path: $(HOME)/.m2/repository
+    key: 'maven | $(Agent.OS) | pom.xml'
+    path: '$(HOME)/.m2/repository'
     restoreKeys: |
       maven | $(Agent.OS)
 
-- task: Maven@3
-  # Use the newer Maven task to avoid deprecation warnings
-  task: Maven@4
+- task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'clean test'
